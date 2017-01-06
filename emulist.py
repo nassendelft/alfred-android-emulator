@@ -1,10 +1,11 @@
 from subprocess import check_output
 from xml.etree import ElementTree as etree
 from sys import argv
+from os import getenv
 
-emulator_path = "/usr/local/bin/emulator"
+path = getenv('emu_path')
 
-emulators = check_output([emulator_path, "-list-avds"]).decode("utf-8").rstrip().split('\n')
+emulators = check_output([path, "-list-avds"]).decode("utf-8").rstrip().split('\n')
 
 
 def build_item(title):
@@ -23,3 +24,4 @@ for emu in emulators:
         root.append(build_item(emu))
 
 print(etree.tostring(root, encoding='utf8', method='xml'))
+
