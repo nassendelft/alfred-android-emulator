@@ -2,8 +2,9 @@ from subprocess import check_output
 from xml.etree import ElementTree as etree
 from sys import argv
 from os import getenv
+from os import path
 
-path = getenv('emu_path')
+path = path.expandvars(getenv('emu_path'))
 
 emulators = check_output([path, "-list-avds"]).decode("utf-8").rstrip().split('\n')
 
