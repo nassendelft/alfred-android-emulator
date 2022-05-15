@@ -24,5 +24,5 @@ for emu in emulators:
     if len(argv) == 1 or emu.startswith(argv[1]):
         root.append(build_item(emu))
 
-print(etree.tostring(root, encoding='utf8', method='xml'))
+print(etree.tostring(root, encoding='utf8', method='xml').decode())
 
