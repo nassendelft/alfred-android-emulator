@@ -7,18 +7,14 @@ from os import path
 
 def get_emulator_executable():
     """
-    Reads the 'emu_path' environment variable
-    if not set it will look for the ANDROID_HOME env var instead.
+    Reads the 'ANDROID_HOME' environment variable to get to the
+    emulator binary path
     """
-    emu_path_env = getenv('emu_path')
-    if emu_path_env is not None:
-        return path.expandvars(emu_path_env)
+    android_home_env = getenv('ANDROID_HOME')
+    if android_home_env is not None:
+        return path.join(path.expandvars(android_home_env), "emulator/emulator")
 
-    android_sdk_env = getenv('ANDROID_HOME')
-    if android_sdk_env is not None:
-        return path.join(path.expandvars(android_sdk_env), "emulator/emulator")
-
-    raise FileNotFoundError("Could not determine emulator executable location")
+    raise ValueError("Could not determine emulator executable location")
 
 
 def build_emulator_item(title):
